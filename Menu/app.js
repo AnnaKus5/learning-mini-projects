@@ -72,3 +72,69 @@ const menu = [
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
 ];
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  loadMenu(menu);
+  loadBtnMenu();
+});
+
+let sectionCenter = document.querySelector(".section-center");
+
+
+function loadMenu(menu) {
+  let listOfMeals = menu.map(item => {
+    return `
+    <article class="menu-item">
+        <img src="${item.img}" alt="${item.title}" class="photo">
+        <div class="item-info">
+          <header>
+            <h4>${item.title}</h4>
+            <h4 class="price">$${item.price}</h4>
+          </header>
+          <p class="item-text">${item.desc}</p>
+        </div>
+      </article>`
+  }).join("");
+
+  sectionCenter.innerHTML = listOfMeals;
+
+}
+
+function loadBtnMenu () {
+
+  addBtns();
+  addBtnsEvents();
+
+  function addBtns() {
+    let btnContainer = document.querySelector(".btn-container");
+
+    let categories = new Set(menu.map(item => item.category));
+  
+    categories.forEach(item => {
+      let btn = document.createElement("button");
+      btn.classList.add("filter-btn");
+      btn.textContent = item;
+      btnContainer.append(btn);
+    });
+
+  }
+
+  function addBtnsEvents() {
+    let btns = document.querySelectorAll("button");
+
+    btns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        let category = e.currentTarget.textContent;
+        if (category === "all") {
+          loadMenu(menu);
+        }
+        else {
+          let categoryMenu = menu.filter(item => item.category === category);
+          loadMenu(categoryMenu);
+        }
+      })
+    })
+    console.log(btns)
+  }
+}
