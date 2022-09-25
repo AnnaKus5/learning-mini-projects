@@ -1,0 +1,13 @@
+{
+  "name": "fcc_menu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1-basic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "json-server --watch db.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
